@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>fetch Cache Example</title>
+</head>
+<body>
+  <h1>fetch API Cache Behavior</h1>
+  <button id="fetchData">Fetch Data</button>
+  <div id="result"></div>
+
+  <script>
+    const resultDiv = document.getElementById("result");
+    const fetchButton = document.getElementById("fetchData");
+
+    fetchButton.addEventListener("click", () => {
+      const options = {
+        method: 'GET',
+        cache: 'force-cache',
+      };
+
+      fetch('https://bank.teraren.com/banks.json?per=10', options)
+        .then(response => response.json())
+        .then(data => {
+          resultDiv.textContent = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+          resultDiv.textContent = 'Error: ' + error;
+        });
+    });
+  </script>
+</body>
+</html>
